@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dpo-casework"
+version = "0.1.0"
+description = "Thin casework queue consumer for DPO ledger workflows"
+readme = "README.md"
+requires-python = ">=3.9,<4"
+authors = [{ name = "DPO" }]
+license = { text = "MIT" }
+dependencies = [
+  "dpo-ledger-tools @ git+https://github.com/Adsco1727/dpo-ledger-tools.git"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dpo_casework*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

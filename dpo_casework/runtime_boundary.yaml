@@ -1,0 +1,36 @@
+version: 1
+name: dpo_casework_runtime_boundary
+
+description: Thin casework queue operations with governed writes via shared ledger tools.
+
+environments:
+  dtop:
+    role: build_test_orchestrate
+  ltop:
+    role: minimal_runtime
+
+module_policy:
+  casework_orchestration:
+    deploy_to_ltop: true
+    reason: Runtime casework operations need controlled queue updates.
+  direct_ledger_schema:
+    deploy_to_ltop: false
+    reason: Schema ownership remains in dpo-ledger-tools.
+  external_automation:
+    deploy_to_ltop: false
+    reason: Wave 6 execution automation is out of scope for this bootstrap.
+
+required_module_metadata:
+  - module_name
+  - runtime_required
+  - owner
+  - depends_on
+  - python_version
+
+python_compatibility:
+  docassemble_or_solidity_connected: 3.9.11
+
+promotion_rules:
+  - all writes must go through dpo-ledger-tools APIs
+  - payloads must include clause_task_id, analysis_type, status, operator, and reason_code
+  - tests must cover read, payload validation, and clause queue update write paths
