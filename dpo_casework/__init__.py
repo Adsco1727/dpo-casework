@@ -1,6 +1,6 @@
 """Thin casework queue consumer for DPO workflows."""
 
-from .casework_ops import read_pending_clause_tasks, write_casework_update
+from .case_ops import read_pending_clause_tasks, write_casework_update
 from .payloads import validate_casework_payload
 
 __all__ = [
